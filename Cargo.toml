@@ -1,0 +1,36 @@
+[package]
+name = "bcc"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rust_decimal = { version = "1", features = ["serde-str"] } 
+thiserror = "1"
+redb = "2"
+serde = { version = "1", features = ["derive"] }
+clap = { version = "4.0", features = ["derive"] }
+num_cpus = "1"
+csv = "1"
+rand = {version = "0.8", optional = true}
+rand_chacha = {version = "0.3", optional = true }
+tempfile = "3"
+
+[dev-dependencies]
+criterion = { version = "0.3", features = ["async_tokio"] }
+quickcheck = "1"
+quickcheck_macros = "1"
+
+tempfile = "3"
+
+[[bench]]
+name = "main"
+harness = false
+required-features = ["with_bench"]
+
+[profile.bench]
+debug = true
+
+[features]
+with_bench = ["rand", "rand_chacha"]
